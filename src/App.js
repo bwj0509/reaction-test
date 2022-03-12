@@ -1,7 +1,9 @@
 import './App.css';
 import Nav from './component/Nav';
-import { Navbar, Container } from 'react-bootstrap'
 import Main from './component/Main';
+import Score from './component/Score';
+import { Navbar, Container } from 'react-bootstrap'
+
 
 function App() {
   return (

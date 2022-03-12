@@ -9,18 +9,21 @@
   margin: 5vh auto;
   width: 80vw;
   height: 50vh;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 1px #dedce0;
 }
+
 .go {
-  background-color: rgb(11, 92, 11);
+  background-color: #8dc32f;
   font-size: 6vw;
   color: aliceblue;
 }
 .ready {
-  background-color: yellow;
+  background-color: #f4fcd9;
   font-size: 6vw;
 }
 .waiting {
-  background-color: yellow;
+  background-color: #f4fcd9;
   font-size: 6vw;
 }
 
@@ -32,8 +35,8 @@
 }
 
 .mainfontsize {
-  font-size: 3vw;
+  font-size: 4vw;
 }
 .mainfontsize1 {
-  font-size: 4vw;
+  font-size: 5vw;
 }

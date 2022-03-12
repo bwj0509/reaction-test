@@ -17,6 +17,11 @@ function Nav() {
           />{'  '}
         반응속도 테스트
         </Navbar.Brand>
+        <Navbar.Collapse className="justify-content-end">
+            <Navbar.Text>
+                <div>백우진</div>
+            </Navbar.Text>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
     </>
