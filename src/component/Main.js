@@ -7,7 +7,6 @@ function Main(){
    const [gameIntroduce, setGameIntroduce] = useState(true);
    const [screenState, setScreenState] = useState('waiting');
    const [message, setMessage] = useState('시작하시려면 화면클릭');
-   const [resultMessage, setResultMessage] = useState('기본값')
    const [resultTime, setResultTime] = useState([]);
    const [name, setName] = useState('백우진');
    const [name2, setName2] = useState('')
@@ -29,7 +28,7 @@ function Main(){
                setScreenState('go');
                setMessage('클릭!');
                startTime.current = new Date() //시작시간 체크
-           }, Math.floor((( Math.random()*1000 ) + 2000))); // 2초 ~ 3초
+           }, Math.floor((( Math.random()*2000 ) + 2000))); // 2초 ~ 4초
         }
 
         else if(screenState === 'ready'){
