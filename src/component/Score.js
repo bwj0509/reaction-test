@@ -2,8 +2,7 @@ import React, {useState} from "react";
 import { Table, InputGroup, FormControl, Button } from 'react-bootstrap'
 
 function Score(props){
-    const ascendingArr = [...props.resultTime].sort( (a,b) => a[0] - b[0] )
-    console.log(ascendingArr)
+    const ascendingArr = [...props.resultAvg].sort( (a,b) => a[0] - b[0] )
     
     return(
         <div style={{width:'80vw', margin:'auto'}}>
