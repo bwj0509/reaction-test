@@ -10,7 +10,7 @@ function Main(){
    const [message, setMessage] = useState('시작하시려면 화면클릭'); // div화면에 보여지는 메세지 State
    const [count, setCount] = useState(1); // 게임을 3번 반복하면 1번 사이클 State  
    const [resultTime, setResultTime] = useState([]); // 게임 결과(시간)을 보여주기 위해 만든 State 
-   const [resultAvg, setResultAvg] = useState([]);
+   const [resultAvg, setResultAvg] = useState([]); // 3번의 결과를 받아 평균값을 저장하는 State
 
    const [name, setName] = useState('백우진');
    const [name2, setName2] = useState('') // 게임 결과(이름)보여주기 위해 만든 State
@@ -33,7 +33,7 @@ function Main(){
                     setScreenState('go');
                     setMessage('클릭!');
                     startTime.current = new Date() //시작시간 체크
-                }, Math.floor((( Math.random()*1000 ) + 200))); // 2초 ~ 4초 // 테스트모드 실행중!
+                }, Math.floor((( Math.random()*3000 ) + 2000))); // 2초 ~ 5초 // 테스트모드 실행중!
             }
     
             else if(screenState === 'ready'){
@@ -49,6 +49,7 @@ function Main(){
                 setResultTime((prev)=>{
                     return [...prev, endTime.current - startTime.current];
                 })
+                console.log(resultTime)
                 setCount(count+1)
                 
             }
@@ -83,7 +84,7 @@ function Main(){
                     </Navbar.Brand>
                     <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text>
-                            <div>백우진</div>
+                            <div>{name}</div>
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Container>
@@ -106,7 +107,7 @@ function Main(){
                 :null
                 }
                 {count === (3+1) // 왜 여기서는 +1을 해야하는지...
-                ?<><div className="mainfontsize">3번의 평균값은 {resultAvg[resultAvg.length -1 ][0]}ms 입니다.</div><Button variant="warning" onClick={gameRestart}>다시 시도하기</Button></>
+                ?<><div className="mainfontsize">3번의 평균값은 {Math.floor((Number(resultTime[0])+Number(resultTime[1])+Number(resultTime[2])) / 3)}ms입니다.</div><Button variant="warning" onClick={gameRestart}>다시 시도하기</Button></>
                 :null
                 }
             </div>
