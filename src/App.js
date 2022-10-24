@@ -1,11 +1,11 @@
 import './App.css';
-import Main from './component/Main';
+import ReactionTest from './component/ReactionTest';
 
 
 function App() {
   return (
     <>
-      <Main />
+      <ReactionTest />
     </>
   );
 }
