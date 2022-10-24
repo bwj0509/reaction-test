@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Button, InputGroup, FormControl, Navbar, Container } from 'react-bootstrap';
+
 import Score from "./Score";
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux';
@@ -92,30 +93,6 @@ function ReactionTest() {
 
     return (
         <>
-            <> {/* 상단 Navbar구현*/}
-                <Navbar bg="dark" variant="dark">
-                    <Container>
-                        <Navbar.Brand href="#home">
-                            <img
-                                alt=""
-                                src="../logo.svg"
-                                width="30"
-                                height="30"
-                                className="d-inline-block align-top"
-                            />{'  '}
-                            반응속도 테스트
-                        </Navbar.Brand>
-                        <Navbar.Collapse className="justify-content-end">
-                            <Navbar.Text>
-                                {name
-                                    ? <div>{name}님 환영합니다</div>
-                                    : <div>아래 이름입력란에 이름을 입력해주세요</div>
-                                }
-                            </Navbar.Text>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
-            </>
             {gameIntroduce === true
                 ? <div className="mt-5 introduce">
                     <h4 className="mainfontsize1">게임설명</h4>
