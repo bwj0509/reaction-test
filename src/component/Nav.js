@@ -6,14 +6,16 @@ function Nav() {
     return (<> {/* 상단 Navbar구현*/}
         <Navbar bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="/">
                     <Logo width='40px' />
                     {" "}LOGO NAME
                 </Navbar.Brand>
                 <Navbar.Collapse className="justify-content-end">
-                    <Navbar.Text>
-                        need login
-                    </Navbar.Text>
+                    <Navbar.Brand href="/login">
+                        <Navbar.Text>
+                            Login
+                        </Navbar.Text>
+                    </Navbar.Brand>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

@@ -16,7 +16,11 @@ const MiniResultDiv = styled.div`
         background-color: gray;
     }
 `
-
+const PlayScreenDiv = styled.div`
+    width: 100%;
+    height: 50vh;
+    cursor: pointer;
+`
 
 
 
@@ -24,8 +28,6 @@ function ReactionTest() {
     const state = useSelector((state) => state.users.users)
     console.log(state)
     const dispatch = useDispatch()
-
-    const [gameIntroduce, setGameIntroduce] = useState(true); // 게임설명UI를 보여주기 위한 State
 
     const [screenState, setScreenState] = useState('waiting'); // 상태관리를 하기 위한 State
     const [message, setMessage] = useState('시작하시려면 화면클릭'); // div화면에 보여지는 메세지 State
@@ -55,7 +57,7 @@ function ReactionTest() {
                     setScreenState('go');
                     setMessage('클릭!');
                     startTime.current = new Date() //시작시간 체크
-                }, Math.floor(((Math.random() * 500) + 500))); // 2초 ~ 5초
+                }, Math.floor(((Math.random() * 1000) + 1000))); // 2초 ~ 5초
             }
 
             else if (screenState === 'ready') {
@@ -93,17 +95,8 @@ function ReactionTest() {
 
     return (
         <>
-            {gameIntroduce === true
-                ? <div className="mt-5 introduce">
-                    <h4 className="mainfontsize1">게임설명</h4>
-                    <span className="mainfontsize">3번의 반응속도를 측정 후 평균값을 보여줍니다<br></br>시작하려면 게임설명을 닫고 화면을 클릭하세요</span><br></br>
-                    <Button variant="info" className="mt-2 mainfontsize" onClick={() => { setGameIntroduce(false) }}>닫기</Button>{' '}
-                </div>
-                : null
-            }
-            {/* 게임 설명을 보여주는 MODAL창 */}
 
-            <div id="screen" className={screenState} onClick={name ? onClick : () => { alert('게임을 시작 하기 전 아래에 이름을 먼저 입력해주세요') }}>
+            <PlayScreenDiv className={screenState} onClick={name ? onClick : () => { alert('게임을 시작 하기 전 아래에 이름을 먼저 입력해주세요') }}>
                 {message}
                 {message === '다시 시작하시려면 화면클릭123'
                     ? <div className="mainfontsize">{count - 1}번째 시도는 {endTime.current - startTime.current}ms입니다.</div>
@@ -115,7 +108,7 @@ function ReactionTest() {
                     </>
                     : null
                 }
-            </div>
+            </PlayScreenDiv>
             <MiniResultDiv>
                 첫번째 시도 :{resultTime[0] ? `${resultTime[0]}ms` : '실시 전'}<br />
                 두번째 시도 :{resultTime[1] ? `${resultTime[1]}ms` : '실시 전'}<br />

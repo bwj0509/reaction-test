@@ -7,10 +7,14 @@ import { ReactComponent as SvgOne } from '../svg/1.svg' //svg image import
 import { ReactComponent as SvgTwo } from '../svg/2.svg'
 import { ReactComponent as SvgThree } from '../svg/3.svg'
 
+import { Link } from "react-router-dom"; // Link를 이용해 원하는 페이지로 이동할 수 있게 한다
 
 const ContainerDiv = styled.div`
     width: 70%;
     margin: auto;
+    max-width:600px;
+    max-height:400px;
+    overflow:hidden;
     
 `
 
@@ -49,11 +53,13 @@ function Main() {
             <ContainerDiv>
                 <Row>
                     <Col sm={4}>
-                        <ItemDiv>
-                            <SvgOne />
-                            <TitleDiv>Reaction Test</TitleDiv>
-                            <ContentDiv>How fast are you?</ContentDiv>
-                        </ItemDiv>
+                        <Link to='/reactiontest' style={{ textDecorationLine:'none', color:'black' }}>
+                            <ItemDiv>
+                                <SvgOne />
+                                <TitleDiv>Reaction Test</TitleDiv>
+                                <ContentDiv>How fast are you?</ContentDiv>
+                            </ItemDiv>
+                        </Link>
                     </Col>
                     <Col sm={4}>
                         <ItemDiv>
