@@ -1,4 +1,5 @@
 import userReducer from './reducer/users';
+import scoreReducer from './reducer/score';
 import { combineReducers } from "redux";
 
 
@@ -12,7 +13,8 @@ const persistConfig = {
 
 
 const rootReducer = combineReducers({
-    users: userReducer
+    users: userReducer,
+    score: scoreReducer
 })
 
 export default persistReducer(persistConfig, rootReducer);

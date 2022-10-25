@@ -12,25 +12,32 @@ import { Link } from "react-router-dom"; // Link를 이용해 원하는 페이�
 const ContainerDiv = styled.div`
     width: 70%;
     margin: auto;
-    max-width:600px;
-    max-height:400px;
-    overflow:hidden;
+    max-width:700px;
+    min-width:600px;
+    box-sizing: border-box;
     
 `
 
 const ItemDiv = styled.div`
-    height: 20vw;
-    margin-top: 2vw;
-    padding: 2vw;
+    margin-top: 30px;
+    padding: 20px;
     box-shadow:rgb(0 0 0 / 10%) 0px 2px 5px;
     border-radius: 5px;
     background-color: white;
+    min-width: 220px;
+    max-width: 240px;
+    max-height: 240px;
     cursor: pointer;
     &:hover {
         position: relative;
         bottom:10px;
         fill:#379237;
         box-shadow:rgb(0 0 0 / 30%) 0px 2px 5px;
+        background-color: rgb(250 255 248 / 70%);
+    }
+    &:active{
+        color:#379237;
+        background-color: rgb(250 255 248 / 70%);
     }
     transition:all 100ms linear;
 `
@@ -53,7 +60,7 @@ function Main() {
             <ContainerDiv>
                 <Row>
                     <Col sm={4}>
-                        <Link to='/reactiontest' style={{ textDecorationLine:'none', color:'black' }}>
+                        <Link to='/reactiontest' style={{ textDecorationLine: 'none', color: 'black' }}>
                             <ItemDiv>
                                 <SvgOne />
                                 <TitleDiv>Reaction Test</TitleDiv>
@@ -92,11 +99,13 @@ function Main() {
                         </ItemDiv>
                     </Col>
                     <Col sm={4}>
-                        <ItemDiv>
-                            <SvgOne />
-                            <TitleDiv>Input title</TitleDiv>
-                            <ContentDiv>Input comments</ContentDiv>
-                        </ItemDiv>
+                        <Link to='/result' style={{ textDecorationLine: 'none', color: 'black' }}>
+                            <ItemDiv>
+                                <SvgOne />
+                                <TitleDiv>Result</TitleDiv>
+                                <ContentDiv>temp</ContentDiv>
+                            </ItemDiv>
+                        </Link>
                     </Col>
                 </Row>
             </ContainerDiv >

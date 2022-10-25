@@ -14,32 +14,16 @@
 }
 
 .go {
-  background-color: #8dc32f;
-  font-size: 6vw;
+  background-color: #54B435;
   color: aliceblue;
 }
 
 .ready {
-  background-color: #f4fcd9;
-  font-size: 6vw;
+  background-color: #CF0A0A;
+  color: white;
 }
 
 .waiting {
-  background-color: #f4fcd9;
-  font-size: 6vw;
-}
-
-.introduce {
-  background-color: rgb(188, 231, 217);
-  width: 80vw;
-  margin: auto;
-  padding: 1vw;
-}
-
-.mainfontsize {
-  font-size: 4vw;
-}
-
-.mainfontsize1 {
-  font-size: 5vw;
+  background-color: #5DA7DB;
+  color: white;
 }

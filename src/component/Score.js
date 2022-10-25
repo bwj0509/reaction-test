@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Table, InputGroup, FormControl, Button } from 'react-bootstrap'
 
+
+//지금은 안쓰는데 여기서 오름차순 내름차순 참고하자!!!
 function Score({ resultAvg }) {
     const ascendingArr = resultAvg.sort((a, b) => a[0] - b[0])
 

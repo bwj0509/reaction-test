@@ -1,14 +1,17 @@
 import React, { useRef, useState } from "react";
 import { Button, InputGroup, FormControl, Navbar, Container } from 'react-bootstrap';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
-import Score from "./Score";
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux';
+
+import { ReactComponent as SvgClock } from '../svg/clock.svg'
 
 
 const MiniResultDiv = styled.div`
     width: 80%;
     margin: auto;
+    margin-top: 40px;
     border: 3px solid gray;
     border-radius: 5px;
 
@@ -21,24 +24,29 @@ const PlayScreenDiv = styled.div`
     height: 50vh;
     cursor: pointer;
 `
+const Mentdiv = styled.div`
+    //background-color: #050500;
+    margin: auto;
+    
+`
+const ProgressDiv = styled.div`
+    width: 50%;
+    margin: auto;
+    padding-top: 15px;
+    padding-bottom: 50px;
 
+`
 
 
 function ReactionTest() {
-    const state = useSelector((state) => state.users.users)
+    const state = useSelector((state) => state.score)
     console.log(state)
     const dispatch = useDispatch()
 
-    const [screenState, setScreenState] = useState('waiting'); // 상태관리를 하기 위한 State
-    const [message, setMessage] = useState('시작하시려면 화면클릭'); // div화면에 보여지는 메세지 State
+    const [screenState, setScreenState] = useState('waiting'); // 상태관리를 하기 위한 State [wating, ready, go]
+    const [message, setMessage] = useState('Click Screen!'); // div화면에 보여지는 메세지 State
     const [count, setCount] = useState(1); // 게임을 3번 반복하면 1번 사이클 State  
-    const [resultTime, setResultTime] = useState([]); // 게임 결과(시간)을 보여주기 위해 만든 State 
-    const [resultAvg, setResultAvg] = useState([]); // 3번의 결과를 받아 평균값을 저장하는 State
-
-
-    const [name, setName] = useState('');
-    const [name2, setName2] = useState('') // 게임 결과(이름)보여주기 위해 만든 State
-
+    const [progressbarColor, setProgressbarColor] = useState('variant')
 
     const timeout = useRef();
     const startTime = useRef();
@@ -47,95 +55,98 @@ function ReactionTest() {
 
 
     const onClick = () => {
-
         if (count <= 3) {
             if (screenState === 'waiting') {
                 setScreenState('ready');
-                setMessage('초록색 화면으로 변하면 클릭!');
+                setMessage('Waiting for Green!');
+                setProgressbarColor('danger') //빨간색
 
                 timeout.current = setTimeout(() => { //clearTimeout 위해서 timeout 키워드 설정
                     setScreenState('go');
-                    setMessage('클릭!');
+                    setMessage('Click!');
+                    setProgressbarColor('success') //초록색
                     startTime.current = new Date() //시작시간 체크
-                }, Math.floor(((Math.random() * 1000) + 1000))); // 2초 ~ 5초
+                }, Math.floor(((Math.random() * 500) + 500))); // 2초 ~ 5초
             }
 
             else if (screenState === 'ready') {
                 clearTimeout(timeout.current); // setTimeout 초기화
                 setScreenState('waiting');
-                setMessage('클릭을 너무 일찍했음');
+                setProgressbarColor('varient') //파란색(기본색)
+                setMessage('Early Click...');
             }
 
             else if (screenState === 'go') {
                 endTime.current = new Date(); // 끝시간 체크
                 setScreenState('waiting');
-                setMessage('다시 시작하시려면 화면클릭');
-                setResultTime((prev) => {
-                    return [...prev, endTime.current - startTime.current];
-                })
+                setMessage('Click to keep going');
+                setProgressbarColor('varient') //파란색(기본색)
+                dispatch({ type: 'ADDSCORE', data: endTime.current - startTime.current })
+
                 setCount(count + 1)
 
             }
         }
     }
 
+
     const gameRestart = () => {
-        const sum = Number(resultTime[0]) + Number(resultTime[1]) + Number(resultTime[2])
-        const avg = Math.floor(sum / 3)
-        setResultAvg((prev) => {
-            return [...prev, [avg, name]]
+        dispatch({
+            type: 'RESETSCORE'
         })
-        setResultTime([]);
         setCount(1);
     }
 
 
+    const avg = Math.floor((state.score[0] + state.score[1] + state.score[2]) / 3)
 
+    function AnimatedExample() {
+        return <ProgressBar animated now={45} />;
+    }
 
 
     return (
         <>
 
-            <PlayScreenDiv className={screenState} onClick={name ? onClick : () => { alert('게임을 시작 하기 전 아래에 이름을 먼저 입력해주세요') }}>
-                {message}
-                {message === '다시 시작하시려면 화면클릭123'
-                    ? <div className="mainfontsize">{count - 1}번째 시도는 {endTime.current - startTime.current}ms입니다.</div>
-                    : null
-                }
-                {count === (3 + 1) // 왜 여기서는 +1을 해야하는지...
-                    ? <><div className="mainfontsize">3번의 평균값은 {Math.floor((Number(resultTime[0]) + Number(resultTime[1]) + Number(resultTime[2])) / 3)}ms입니다.</div>
-                        <Button variant="warning" onClick={gameRestart}>다시 시도하기</Button>
-                    </>
-                    : null
-                }
+            <PlayScreenDiv className={screenState} onClick={onClick}>
+                <Mentdiv>
+                    <ProgressDiv>
+                        <ProgressBar variant={progressbarColor} animated now={(state.score.length / 3) * 100} />
+                    </ProgressDiv>
+                    <div>
+                        <SvgClock fill='white' width=''></SvgClock>
+                    </div>
+                    <div style={{ fontSize: '70px' }}>
+                        {count < 4 && message}
+                    </div>
+
+                    {message === 'Click to keep going' && count < 4
+                        ? <div style={{ fontSize: '80px', marginBottom: '20px' }}> {endTime.current - startTime.current}ms</div>
+                        : null
+                    }
+                    {count === (3 + 1) // 왜 여기서는 +1을 해야하는지...
+                        ? <><div style={{ fontSize: '50px', marginTop: '15px', fontWeight: 'bold' }} >Average reaction time</div>
+                            <div style={{ fontSize: '80px', marginBottom: '20px' }}>{avg}ms</div>
+                            <Button variant="warning" onClick={gameRestart}>RETRY</Button>
+                        </>
+                        : null
+                    }
+                </Mentdiv>
             </PlayScreenDiv>
+
             <MiniResultDiv>
-                첫번째 시도 :{resultTime[0] ? `${resultTime[0]}ms` : '실시 전'}<br />
-                두번째 시도 :{resultTime[1] ? `${resultTime[1]}ms` : '실시 전'}<br />
-                세번째 시도 :{resultTime[2] ? `${resultTime[2]}ms` : '실시 전'}<br />
-                평균 : {Math.floor((Number(resultTime[0]) + Number(resultTime[1]) + Number(resultTime[2])) / 3)
-                    ? `${Math.floor((Number(resultTime[0]) + Number(resultTime[1]) + Number(resultTime[2])) / 3)}ms`
+                첫번째 시도 :{state[0] ? `${state[0]}ms` : '실시 전'}<br />
+                두번째 시도 :{state[1] ? `${state[1]}ms` : '실시 전'}<br />
+                세번째 시도 :{state[2] ? `${state[2]}ms` : '실시 전'}<br />
+                평균 : {avg
+                    ? `${avg}ms`
                     : '세번의 시도 후에 보여집니다'
                 }
-                {/* 첫번째, 두번째, 세번째 시도는 resultTime의 값을 받아와서 존재하면 resultTime[i]에 해당하는 값을 보여주고 아니면 실시전 이라고 보여줌 */}
-                {/* 평균은 평균값이 계산될때 즉, resultTime1,2,3이 존재할때 참 문장이 실행되어 평균을 보여준다 */}
+                {/* 첫번째, 두번째, 세번째 시도는 state의 값을 받아와서 존재하면 state[i]에 해당하는 값을 보여주고 아니면 실시전 이라고 보여줌 */}
+                {/* 평균은 평균값이 계산될때 즉, state1,2,3이 존재할때 참 문장이 실행되어 평균을 보여준다 */}
 
             </MiniResultDiv>
-            <hr />
-            <div className="mt-3" style={{ width: '80vw', margin: 'auto' }} >
-                <InputGroup className="mb-3" onChange={(e) => { setName2(e.target.value) }} >
-                    <FormControl
-                        placeholder="이름을 입력해주세요, 이름 변경 가능합니다"
-                        aria-label="Recipient's username"
-                        aria-describedby="basic-addon2"
-                    />
-                    <Button variant="outline-secondary" id="button-addon2" onClick={() => { setName(name2); alert(`${name2}님 반갑습니다^^`) }}>
-                        이름변경
-                    </Button>
-                </InputGroup>
-            </div>
 
-            <Score resultAvg={resultAvg} />
         </>
     )
 }
