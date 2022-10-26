@@ -4,6 +4,8 @@ import Main from './component/Main';
 import Nav from './component/Nav';
 import NotFound from './component/NotFound';
 import Result from './component/Result';
+import Login from './component/Login';
+import Signin from './component/Signin';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom' // 리액트 라우터 기능 사용
 
@@ -18,6 +20,8 @@ function App() {
           : <Route path="/login" element={<><ReactionTest /></>}></Route>
         }
         <Route path="/result" element={<><Result></Result></>}></Route>
+        <Route path="/signin" element={<><Signin></Signin></>}></Route>
+        
         <Route path="*" element={<><NotFound></NotFound></>}></Route>
 
       </Routes>

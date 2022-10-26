@@ -1,6 +1,6 @@
 * {
   text-align: center;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 #screen {
@@ -14,16 +14,16 @@
 }
 
 .go {
-  background-color: #54B435;
+  background-color: #54b435;
   color: aliceblue;
 }
 
 .ready {
-  background-color: #CF0A0A;
+  background-color: #cf0a0a;
   color: white;
 }
 
 .waiting {
-  background-color: #5DA7DB;
+  background-color: #5da7db;
   color: white;
 }
