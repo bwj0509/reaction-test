@@ -8,7 +8,7 @@ function Nav() {
             <Container>
                 <Navbar.Brand href="/">
                     <Logo width='40px' />
-                    {" "}LOGO NAME
+                    <div style={{ display:'inline', color:'rgba(255,255,255,.8)'}}> TEST YOUR EVERYTHING</div>
                 </Navbar.Brand>
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Brand href="/login">
