@@ -108,7 +108,7 @@ function ReactionTest() {
             />
           </ProgressDiv>
           <div>
-            <SvgClock fill="white" width=""></SvgClock>
+            <SvgClock fill="white"></SvgClock>
           </div>
           <div style={{ fontSize: "70px" }}>{count < 4 && message}</div>
 
@@ -120,34 +120,22 @@ function ReactionTest() {
           ) : null}
           {count === 3 + 1 ? ( // 왜 여기서는 +1을 해야하는지...
             <>
-              <div
-                style={{
-                  fontSize: "50px",
-                  marginTop: "15px",
-                  fontWeight: "bold",
-                }}
-              >
-                Average reaction time
-              </div>
-              <div style={{ fontSize: "80px", marginBottom: "20px" }}>
-                {avg}ms
-              </div>
-              <Button variant="warning" onClick={gameRestart}>
-                RETRY
-              </Button>
+              <div style={{ fontSize: "50px", marginTop: "15px", fontWeight: "bold", }}>Average reaction time</div>
+              <div style={{ fontSize: "80px", marginBottom: "20px" }}>{avg}ms</div>
+              <Button variant="warning" onClick={gameRestart}>SAVE SCORE & REGAME</Button>
             </>
           ) : null}
         </Mentdiv>
       </PlayScreenDiv>
 
       <MiniResultDiv>
-        첫번째 시도 :{state[0] ? `${state[0]}ms` : "실시 전"}
+        First : {state.score[0] ? `${state.score[0]}ms` : "Before implementation"}
         <br />
-        두번째 시도 :{state[1] ? `${state[1]}ms` : "실시 전"}
+        Second : {state.score[1] ? `${state.score[1]}ms` : "Before implementation"}
         <br />
-        세번째 시도 :{state[2] ? `${state[2]}ms` : "실시 전"}
+        Third : {state.score[2] ? `${state.score[2]}ms` : "Before implementation"}
         <br />
-        평균 : {avg ? `${avg}ms` : "세번의 시도 후에 보여집니다"}
+        Avgerage : {avg ? `${avg}ms` : "It is shown after three attempts."}
         {/* 첫번째, 두번째, 세번째 시도는 state의 값을 받아와서 존재하면 state[i]에 해당하는 값을 보여주고 아니면 실시전 이라고 보여줌 */}
         {/* 평균은 평균값이 계산될때 즉, state1,2,3이 존재할때 참 문장이 실행되어 평균을 보여준다 */}
       </MiniResultDiv>

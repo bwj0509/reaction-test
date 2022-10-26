@@ -10,7 +10,7 @@ function Result() {
     return (
         <div>
             {avgRank.map((score, index) => (
-                <ul>RANK{index + 1}: {score[1]}: {score[0]}</ul>
+                <ul key={index}>RANK{index + 1}: {score[1]}: {score[0]}</ul>
             ))}
         </div>
     );
