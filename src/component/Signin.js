@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components'; // styled components 사용 -> CSS in Js
-import { useDispatch, useSelector } from 'react-redux';
+//import { useDispatch, useSelector } from 'react-redux';
 
 const Backgrounddiv = styled.div` // styled components를 사용하여 div를 만듬
 background-color: rgb(230, 232, 244);
@@ -109,14 +109,7 @@ const CardIcon = styled.span`
 
 
 `;
-const CardOptionsNote = styled.small`
-  padding-top: 15px;
-  display: block;
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  text-transform: uppercase;
-`;
+
 
 const CardButton = styled.button`
   width: 100%;
@@ -167,14 +160,6 @@ function Signin() {
 
 
   const regPass = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/; //비밀번호 정규식
-
-
-  const dispatch = useDispatch()  // useDispatch를 이용해 reducer로 action을 보낸다.
-  const state = useSelector((state) => state) // useSelector를 이용해 state값을 사용 할 수 있게 한다
-
-  // useEffect(() => {
-  //     console.log(state)
-  // }, [state]) // 의존성 배열에 state를 넣어서 state값이 바뀔때마다 state값을 보여준다. state를 통해서 USER가 등록되었는지 확인 가능하다.
 
 
   const [inputs, setInputs] = useState({

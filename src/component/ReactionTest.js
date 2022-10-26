@@ -1,11 +1,5 @@
 import React, { useRef, useState } from "react";
-import {
-  Button,
-  InputGroup,
-  FormControl,
-  Navbar,
-  Container,
-} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import ProgressBar from "react-bootstrap/ProgressBar";
 
 import styled from "styled-components";
@@ -100,9 +94,7 @@ function ReactionTest() {
     (state.score[0] + state.score[1] + state.score[2]) / 3
   );
 
-  function AnimatedExample() {
-    return <ProgressBar animated now={45} />;
-  }
+
 
   return (
     <>

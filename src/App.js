@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<><Main /></>}></Route>
         {localStorage.getItem('id')
           ? <Route path="/reactiontest" element={<><ReactionTest /></>}></Route>
-          : <Route path="/login" element={<><ReactionTest /></>}></Route>
+          : <Route path="/login" element={<><Login></Login></>}></Route>
         }
         <Route path="/result" element={<><Result></Result></>}></Route>
         <Route path="/signin" element={<><Signin></Signin></>}></Route>
