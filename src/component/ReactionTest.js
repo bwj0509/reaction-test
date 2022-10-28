@@ -20,7 +20,7 @@ const MiniResultDiv = styled.div`
 `;
 const PlayScreenDiv = styled.div`
   width: 100%;
-  height: 50vh;
+  height: 70vh;
   cursor: pointer;
 `;
 const Mentdiv = styled.div`
@@ -101,18 +101,14 @@ function ReactionTest() {
       <PlayScreenDiv className={screenState} onClick={onClick}>
         <Mentdiv>
           <ProgressDiv>
-            <ProgressBar
-              variant={progressbarColor}
-              animated
-              now={(state.score.length / 3) * 100}
-            />
+            <ProgressBar variant={progressbarColor} animated now={(state.score.length / 3) * 100} />
           </ProgressDiv>
           <div>
             <SvgClock fill="white"></SvgClock>
           </div>
           <div style={{ fontSize: "70px" }}>{count < 4 && message}</div>
 
-          {message === "Click to keep going" && count < 4 ? (
+          {message === "Click to keep going" && count < 4 && count >1 ? (
             <div style={{ fontSize: "80px", marginBottom: "20px" }}>
               {" "}
               {endTime.current - startTime.current}ms

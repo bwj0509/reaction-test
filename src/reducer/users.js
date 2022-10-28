@@ -4,6 +4,11 @@ const initialstate = {
             name: 'WOOJIN BAEK',
             password: 'dnwls0509~',
             email: 'bwj59@naver.com'
+        },
+        {
+            name: 'PARK YO DO',
+            password: 'test123',
+            email: 'bwj59@naver.com'
         }
     ]
 }

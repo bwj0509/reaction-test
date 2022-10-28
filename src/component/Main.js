@@ -41,6 +41,7 @@ const ItemDiv = styled.div`
   }
   transition: all 100ms linear;
 `;
+
 const ItemDiv2 = styled.div`
   margin-top: 30px;
   padding: 20px;
@@ -78,6 +79,7 @@ const ContentDiv = styled.div`
   margin-top: 15px;
 `;
 
+
 function Main() {
   return (
     <div
@@ -86,10 +88,7 @@ function Main() {
       <ContainerDiv>
         <Row>
           <Col sm={4}>
-            <Link
-              to="/reactiontest"
-              style={{ textDecorationLine: "none", color: "black" }}
-            >
+            <Link to="/reactiontest" style={{ textDecorationLine: "none", color: "black" }} >
               <ItemDiv>
                 <SvgOne />
                 <TitleDiv>Reaction Test</TitleDiv>
@@ -98,10 +97,7 @@ function Main() {
             </Link>
           </Col>
           <Col sm={4}>
-            <Link
-              to="/abcdefg"
-              style={{ textDecorationLine: "none", color: "black" }}
-            >
+            <Link to="/abcdefg" style={{ textDecorationLine: "none", color: "black" }}>
               <ItemDiv>
                 <SvgTwo />
                 <TitleDiv>Not found</TitleDiv>
@@ -118,6 +114,15 @@ function Main() {
           </Col>
         </Row>
         <Row>
+            <Col sm={4}>
+              <Link to='/test' style={{ textDecorationLine: "none", color: "black" }}>
+                <ItemDiv>
+                  < SvgOne />
+                  <TitleDiv>Test Page</TitleDiv>
+                  <ContentDiv>Test Everything</ContentDiv>
+                </ItemDiv>
+              </Link>
+            </Col>
           <Col sm={4}>
             <ItemDiv>
               <SvgOne />
@@ -126,17 +131,7 @@ function Main() {
             </ItemDiv>
           </Col>
           <Col sm={4}>
-            <ItemDiv>
-              <SvgOne />
-              <TitleDiv>Input title</TitleDiv>
-              <ContentDiv>Input comments</ContentDiv>
-            </ItemDiv>
-          </Col>
-          <Col sm={4}>
-            <Link
-              to="/result"
-              style={{ textDecorationLine: "none", color: "black" }}
-            >
+            <Link to="/result" style={{ textDecorationLine: "none", color: "black" }}>
               <ItemDiv>
                 <SvgOne />
                 <TitleDiv>Result</TitleDiv>
