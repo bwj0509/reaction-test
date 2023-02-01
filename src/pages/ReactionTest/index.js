@@ -1,38 +1,9 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import ProgressBar from "react-bootstrap/ProgressBar";
-
-import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-
-import { ReactComponent as SvgClock } from "../svg/clock.svg";
-
-const MiniResultDiv = styled.div`
-  width: 80%;
-  margin: auto;
-  margin-top: 40px;
-  border: 3px solid gray;
-  border-radius: 5px;
-
-  :hover {
-    background-color: gray;
-  }
-`;
-const PlayScreenDiv = styled.div`
-  width: 100%;
-  height: 70vh;
-  cursor: pointer;
-`;
-const Mentdiv = styled.div`
-  //background-color: #050500;
-  margin: auto;
-`;
-const ProgressDiv = styled.div`
-  width: 50%;
-  margin: auto;
-  padding-top: 15px;
-  padding-bottom: 50px;
-`;
+import { ReactComponent as SvgClock } from "svg/clock.svg";
+import * as S from "pages/ReactionTest/indexStyle";
 
 function ReactionTest() {
   const state = useSelector((state) => state.score);
@@ -49,7 +20,7 @@ function ReactionTest() {
   const endTime = useRef();
   // useRef를 이용하여 변수관리를 실시한다. -> 재랜더링 필요없음
 
-  const onClick = () => {
+  const handleStartGame = () => {
     if (count <= 3) {
       if (screenState === "waiting") {
         setScreenState("ready");
@@ -83,7 +54,7 @@ function ReactionTest() {
     }
   };
 
-  const gameRestart = () => {
+  const handleRestartGame = () => {
     dispatch({
       type: "RESETSCORE",
     });
@@ -94,48 +65,52 @@ function ReactionTest() {
     (state.score[0] + state.score[1] + state.score[2]) / 3
   );
 
-
-
   return (
-    <>
-      <PlayScreenDiv className={screenState} onClick={onClick}>
-        <Mentdiv>
-          <ProgressDiv>
-            <ProgressBar variant={progressbarColor} animated now={(state.score.length / 3) * 100} />
-          </ProgressDiv>
-          <div>
-            <SvgClock fill="white"></SvgClock>
-          </div>
-          <div style={{ fontSize: "70px" }}>{count < 4 && message}</div>
+    <S.GameWrapper>
+      <S.PlayScreen className={screenState} onClick={handleStartGame}>
+        <S.Mentdiv>
+          <S.Progress>
+            <ProgressBar
+              variant={progressbarColor}
+              animated
+              now={(state.score.length / 3) * 100}
+            />
+          </S.Progress>
+          <SvgClock fill="white"></SvgClock>
+          <S.GameMessageWrapper>{count < 4 && message}</S.GameMessageWrapper>
 
-          {message === "Click to keep going" && count < 4 && count >1 ? (
-            <div style={{ fontSize: "80px", marginBottom: "20px" }}>
-              {" "}
+          {message === "Click to keep going" && count < 4 && count > 1 ? (
+            <S.GameScoreWrapper>
               {endTime.current - startTime.current}ms
-            </div>
+            </S.GameScoreWrapper>
           ) : null}
-          {count === 3 + 1 ? ( // 왜 여기서는 +1을 해야하는지...
+          {count === 3 + 1 ? (
             <>
-              <div style={{ fontSize: "50px", marginTop: "15px", fontWeight: "bold", }}>Average reaction time</div>
-              <div style={{ fontSize: "80px", marginBottom: "20px" }}>{avg}ms</div>
-              <Button variant="warning" onClick={gameRestart}>SAVE SCORE & REGAME</Button>
+              <S.GameMessageWrapper>Average reaction time</S.GameMessageWrapper>
+              <S.GameScoreWrapper>{avg}ms</S.GameScoreWrapper>
+              <Button variant="warning" onClick={handleRestartGame}>
+                SAVE SCORE & REGAME
+              </Button>
             </>
           ) : null}
-        </Mentdiv>
-      </PlayScreenDiv>
+        </S.Mentdiv>
+      </S.PlayScreen>
 
-      <MiniResultDiv>
-        First : {state.score[0] ? `${state.score[0]}ms` : "Before implementation"}
+      <S.MiniResultDiv>
+        First :{" "}
+        {state.score[0] ? `${state.score[0]}ms` : "Before implementation"}
         <br />
-        Second : {state.score[1] ? `${state.score[1]}ms` : "Before implementation"}
+        Second :{" "}
+        {state.score[1] ? `${state.score[1]}ms` : "Before implementation"}
         <br />
-        Third : {state.score[2] ? `${state.score[2]}ms` : "Before implementation"}
+        Third :{" "}
+        {state.score[2] ? `${state.score[2]}ms` : "Before implementation"}
         <br />
         Avgerage : {avg ? `${avg}ms` : "It is shown after three attempts."}
         {/* 첫번째, 두번째, 세번째 시도는 state의 값을 받아와서 존재하면 state[i]에 해당하는 값을 보여주고 아니면 실시전 이라고 보여줌 */}
         {/* 평균은 평균값이 계산될때 즉, state1,2,3이 존재할때 참 문장이 실행되어 평균을 보여준다 */}
-      </MiniResultDiv>
-    </>
+      </S.MiniResultDiv>
+    </S.GameWrapper>
   );
 }
 export default ReactionTest;
