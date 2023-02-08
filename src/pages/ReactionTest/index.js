@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { useSelector, useDispatch } from "react-redux";
-import { ReactComponent as SvgClock } from "svg/clock.svg";
+import { ReactComponent as SvgClock } from "asset/svg/clock.svg";
 import * as S from "pages/ReactionTest/indexStyle";
 
 function ReactionTest() {

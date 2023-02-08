@@ -10,9 +10,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-import { ReactComponent as GoldMedal } from "svg/goldMedal.svg";
-import { ReactComponent as SilverMedal } from "svg/silverMedal.svg";
-import { ReactComponent as BronzeMedal } from "svg/bronzeMedal.svg";
+import { ReactComponent as GoldMedal } from "asset/svg/goldMedal.svg";
+import { ReactComponent as SilverMedal } from "asset/svg/silverMedal.svg";
+import { ReactComponent as BronzeMedal } from "asset/svg/bronzeMedal.svg";
 
 function Result() {
   const state = useSelector((state) => state.score.avgRank);

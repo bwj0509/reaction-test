@@ -2,10 +2,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import * as S from "pages/Landing/indexStyle";
 
-import { ReactComponent as SvgOne } from "svg/1.svg";
-import { ReactComponent as SvgTwo } from "svg/2.svg";
-import { ReactComponent as SvgThree } from "svg/3.svg";
-import { ReactComponent as SvgFour } from "svg/4.svg";
+import { ReactComponent as SvgOne } from "asset/svg/1.svg";
+import { ReactComponent as SvgTwo } from "asset/svg/2.svg";
+import { ReactComponent as SvgThree } from "asset/svg/3.svg";
+import { ReactComponent as SvgFour } from "asset/svg/4.svg";
 
 function Landing() {
   return (
