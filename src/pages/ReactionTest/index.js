@@ -4,11 +4,13 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { useSelector, useDispatch } from "react-redux";
 import { ReactComponent as SvgClock } from "asset/svg/clock.svg";
 import * as S from "pages/ReactionTest/indexStyle";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function ReactionTest() {
   const state = useSelector((state) => state.score);
-  console.log(state);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [screenState, setScreenState] = useState("waiting"); // 상태관리를 하기 위한 State [wating, ready, go]
   const [message, setMessage] = useState("Click Screen!"); // div화면에 보여지는 메세지 State
@@ -65,6 +67,29 @@ function ReactionTest() {
     (state.score[0] + state.score[1] + state.score[2]) / 3
   );
 
+  if (!localStorage.getItem("userName")) {
+    let timerInterval;
+    Swal.fire({
+      title: "비정상적인 접근입니다.",
+      html: "<b></b> 시간 후에 메인으로 이동합니다.",
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+        const b = Swal.getHtmlContainer().querySelector("b");
+        timerInterval = setInterval(() => {
+          b.textContent = Swal.getTimerLeft();
+        }, 100);
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      },
+    }).then((result) => {
+      navigate("/");
+      navigate(0);
+    });
+  }
+
   return (
     <S.GameWrapper>
       <S.PlayScreen className={screenState} onClick={handleStartGame}>
@@ -97,14 +122,11 @@ function ReactionTest() {
       </S.PlayScreen>
 
       <S.MiniResultDiv>
-        First :{" "}
-        {state.score[0] ? `${state.score[0]}ms` : "Before implementation"}
+        1️⃣ : {state.score[0] ? `${state.score[0]}ms` : "Before implementation"}
         <br />
-        Second :{" "}
-        {state.score[1] ? `${state.score[1]}ms` : "Before implementation"}
+        2️⃣ : {state.score[1] ? `${state.score[1]}ms` : "Before implementation"}
         <br />
-        Third :{" "}
-        {state.score[2] ? `${state.score[2]}ms` : "Before implementation"}
+        3️⃣ : {state.score[2] ? `${state.score[2]}ms` : "Before implementation"}
         <br />
         Avgerage : {avg ? `${avg}ms` : "It is shown after three attempts."}
         {/* 첫번째, 두번째, 세번째 시도는 state의 값을 받아와서 존재하면 state[i]에 해당하는 값을 보여주고 아니면 실시전 이라고 보여줌 */}

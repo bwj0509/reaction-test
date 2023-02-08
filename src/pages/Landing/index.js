@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import * as S from "pages/Landing/indexStyle";
@@ -8,12 +10,25 @@ import { ReactComponent as SvgThree } from "asset/svg/3.svg";
 import { ReactComponent as SvgFour } from "asset/svg/4.svg";
 
 function Landing() {
+  const navigate = useNavigate();
+  const handleIsLogin = () => {
+    if (localStorage.getItem("userName")) {
+      navigate("/reactiontest");
+      navigate(0);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "로그인이 필요합니다.",
+        text: "우측 상단의 로그인을 해주세요.",
+      });
+    }
+  };
   return (
     <S.Container>
       <S.ItemContainer>
         <Row>
           <Col sm={4}>
-            <S.StyledLink to="/reactiontest">
+            <S.StyledLink onClick={handleIsLogin}>
               <S.ItemDiv>
                 <SvgOne />
                 <S.TitleDiv>Reaction Test</S.TitleDiv>
