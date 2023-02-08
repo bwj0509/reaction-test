@@ -1,6 +1,5 @@
 import "./App.css";
 import Nav from "./component/Nav/Nav";
-// import Result from "./component/Result";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "pages/Landing";
@@ -10,7 +9,7 @@ import Result from "pages/Result";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Nav />
       <Routes>
         <Route path="/" element={<Landing />}></Route>
