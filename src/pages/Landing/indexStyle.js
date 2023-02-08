@@ -24,6 +24,7 @@ export const ItemDiv = styled.div`
   min-width: 220px;
   max-width: 240px;
   max-height: 240px;
+  color: black;
   cursor: pointer;
   &:hover {
     position: relative;
@@ -31,6 +32,7 @@ export const ItemDiv = styled.div`
     fill: #379237;
     box-shadow: rgb(0 0 0 / 30%) 0px 2px 5px;
     background-color: rgb(250 255 248 / 70%);
+    color: #379237;
   }
   &:active {
     color: #379237;
