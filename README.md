@@ -1,6 +1,7 @@
 <h1 align="center"> 응답속도 측정 미니게임 🎮 </h1>
 
 <p align="center">당신의 반응속도가 어느정도 되는지 궁금하다면 시작해보세요!</p>
+<p align="center">배포 주소 : https://reaction-test-woojin.netlify.app/</p>
 
 <br>
 
