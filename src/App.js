@@ -9,7 +9,7 @@ import Result from "pages/Result";
 
 function App() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter>
       <Nav />
       <Routes>
         <Route path="/" element={<Landing />}></Route>
